@@ -1,0 +1,2 @@
+class LedgerInterpreter:
+    pass

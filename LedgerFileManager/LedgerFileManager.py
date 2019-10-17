@@ -1,0 +1,2 @@
+class LedgerFileManager:
+    pass

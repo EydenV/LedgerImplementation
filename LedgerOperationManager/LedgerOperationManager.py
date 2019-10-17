@@ -1,0 +1,2 @@
+class LedgerOperationManager:
+    pass
