@@ -1,8 +1,17 @@
 import sys
-from CommandManager import CommandHandler
+from CommandManager.CommandManager import CommandManager
+from LedgerFileManager.LedgerFileManager import LedgerFileManager
 
 def main():
-    print(sys.argv)
+
+    commandManager = CommandManager(sys.argv[1::])
+    commands,arguments = commandManager.getInfo()
+
+    fileManager = LedgerFileManager(arguments)
+
+    if fileManager.booksExists():
+        #Hacer lo siguiente en el parseo
+        fileManager.parseAllBooks()
 
 
 

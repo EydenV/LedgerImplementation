@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python main.py  --price-db prices_db -f index.ledger "$@"
+python main.py --price-db prices_db --file index.ledger "$@"
