@@ -3,10 +3,10 @@ import os
 class LedgerFileManager:
 
     def __init__(self,arguments):
-        self.arguments =    arguments
-        self.books =        []
-        self.filePaths =    []
-        self.bookParsed =   {}
+        self.arguments =        arguments
+        self.books =            []
+        self.bookParsed =       {}
+        self.includeFiles =     []
 
     def booksExists(self):
 
@@ -32,19 +32,59 @@ class LedgerFileManager:
 
         return True
 
-    def getFilePaths(self):
-        for book in self.books:
-            self.filePaths.append(os.getcwd() + "/" + book)
+    def getFilePaths(self,files):
 
-        return self.filePaths
+        filePaths = []
+        for book in files:
+            filePaths.append(os.getcwd() + "/" + book)
+
+        return filePaths
+
+    def parse(self,filePaths,fileParser,books):
+        for i,file in enumerate(filePaths):
+            self.bookParsed[books[i]] = fileParser.parseBook(file)
 
     def parseAllBooks(self):
 
-        self.getFilePaths()
+        filePaths = self.getFilePaths(self.books)
         fileParser = LedgerFileParser()
 
-        for i,file in enumerate(self.filePaths):
-            self.bookParsed[self.books[i]] = fileParser.parseBook(file)
+        self.parse(filePaths,fileParser,self.books)
+
+        if "include" in self.bookParsed.values():
+            for key, value in self.bookParsed.items():
+                if value == "include":
+                    self.includeFiles.append(key)
+
+            self.parseIncludeFile()
+
+
+    def parseIncludeFile(self):
+
+        filePaths = self.getFilePaths(self.includeFiles)
+        fileParser = LedgerFileParser()
+
+        fileNames = []
+
+        for f in filePaths:
+            content = fileParser.getContent(f).replace("!include","").strip()
+            for fileName in content.split("\n"):
+                fileNames.append(fileName.strip())
+
+
+        for f in self.includeFiles:
+            del self.bookParsed[f]
+
+        filePaths = self.getFilePaths(fileNames)
+        self.parse(filePaths,fileParser,fileNames)
 
         print(self.bookParsed)
+
+
+
+
+
+
+
+
 
