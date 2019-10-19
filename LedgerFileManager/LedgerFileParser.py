@@ -13,7 +13,6 @@ class LedgerFileParser:
         f = open(filePath)
         contentString = f.read()
         f.close()
-
         return contentString
 
     def parseBook(self,filePath):

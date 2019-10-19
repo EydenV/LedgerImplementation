@@ -11,13 +11,8 @@ def main():
     fileManager = LedgerFileManager(arguments)
 
     if fileManager.booksExists():
-        #Hacer lo siguiente en el parseo
         fileManager.parseAllBooks()
-
         operationManager = LedgerOperationManager(commandManager.generateOperations(commands,arguments))
-
-
-
 
 
 

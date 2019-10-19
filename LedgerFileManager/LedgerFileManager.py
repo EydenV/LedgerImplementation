@@ -41,7 +41,8 @@ class LedgerFileManager:
 
     def parse(self,filePaths,fileParser,books):
         for i,file in enumerate(filePaths):
-            self.bookParsed[books[i]] = fileParser.parseBook(file)
+            if os.path.isfile(file):
+                self.bookParsed[books[i]] = fileParser.parseBook(file)
 
     def parseAllBooks(self):
 
