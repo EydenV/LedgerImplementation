@@ -1,6 +1,7 @@
 import sys
 from CommandManager.CommandManager import CommandManager
 from LedgerFileManager.LedgerFileManager import LedgerFileManager
+from LedgerOperationManager.LedgerOperationManager import LedgerOperationManager
 
 def main():
 
@@ -12,6 +13,11 @@ def main():
     if fileManager.booksExists():
         #Hacer lo siguiente en el parseo
         fileManager.parseAllBooks()
+
+        operationManager = LedgerOperationManager(commandManager.generateOperations(commands,arguments))
+
+
+
 
 
 

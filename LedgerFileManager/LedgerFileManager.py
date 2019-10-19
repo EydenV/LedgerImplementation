@@ -9,7 +9,6 @@ class LedgerFileManager:
         self.includeFiles =     []
 
     def booksExists(self):
-
         bookNames = []
 
         for book in self.arguments:
@@ -77,14 +76,3 @@ class LedgerFileManager:
 
         filePaths = self.getFilePaths(fileNames)
         self.parse(filePaths,fileParser,fileNames)
-
-        print(self.bookParsed)
-
-
-
-
-
-
-
-
-

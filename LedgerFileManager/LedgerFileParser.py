@@ -27,7 +27,7 @@ class LedgerFileParser:
         elif isTransaction == "price":
             journal = ledgerparse.string_to_non_transactions(contentString)
         else:
-            journal = ledgerparse.string_to_transaction(contentString)
+            journal = ledgerparse.string_to_ledger(contentString)
 
         return journal
 
