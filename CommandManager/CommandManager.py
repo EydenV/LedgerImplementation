@@ -7,10 +7,11 @@ class CommandManager:
         self.command = command
 
     def getInfo(self):
-        if type(CommandSyntaxChecker.syntaxCheck(self.command)).__name__ == "tuple" :
-            return CommandSyntaxChecker.syntaxCheck(self.command)
+        syntaxChecker = CommandSyntaxChecker()
+        if type(syntaxChecker.syntaxCheck(self.command)).__name__ == "tuple" :
+            return syntaxChecker.syntaxCheck(self.command)
         else:
-            sys.exit("Error: Unrecognized command '" + CommandSyntaxChecker.syntaxCheck(self.command) + "'")
+            sys.exit("Error: Unrecognized command '" + syntaxChecker.syntaxCheck(self.command) + "'")
 
     def generateOperations(self,commands = None, arguments = None):
         operation = []
@@ -29,11 +30,12 @@ class CommandManager:
                     oneCommmand = True
                     operation.append(argument)
                 else:
-                    operation.append(argument)
-                    arguments.remove(argument)
-                    break
-
-
+                    if (command == "--sort" or command == "-s") and len(argument) > 1:
+                        break
+                    else:
+                        operation.append(argument)
+                        arguments.remove(argument)
+                        break
             operations.append(operation)
             operation = []
 

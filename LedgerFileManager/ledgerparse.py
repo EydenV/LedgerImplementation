@@ -343,6 +343,7 @@ def string_to_transaction(text, aliases={}):
 			tmp_amount = m_account.group('amount')
 
 			# add this account to the output ledger_transaction
+			#print(tmp_amount)
 			output.add_account(tmp_name, tmp_commodity, tmp_amount)
 
 			# set last to Acc
